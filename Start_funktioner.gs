@@ -1,31 +1,19 @@
 /**
  * @author Emil Öhman <emil.ohman@scouterna.se>
  * @website https://github.com/Scouterna
- * @version 2022-12-30
+ * @version 2026-09-04
  */
-
 
 /**
  * Anropa denna funktion om du vill synkronisera både användare och
- * grupper direkt efter varandra
+ * grupper direkt efter varandra. The modernized entry point performs a
+ * fail-closed Scoutnet preflight before any Google writes are made.
  */
 function synkroniseraAnvandareOchGrupper() {
-  synkroniseraAnvandare();
-  synkroniseraGrupperAllaRader();
+  synkroniseraAnvandareOchGrupperSakert();
 }
 
-
 /***Grupper***/
-
-/**
- * Funktioner för att ange att enbart vissa radintervall och
- * eller etiketter i kalkylbladet ska synkroniseras
- *
- * Exempelvis rad 0 till 10. Helt fritt att ändra själv
- * Går att komplettera med en etikett för t.ex bara de inom
- * radintervallet med en viss etikett ska synkas.
- * Går att ange enbart etikett om så önskas.
- */
 function synkroniseraGrupperVissaRader1() {
   synkroniseraGrupper_(0, 10);
 }
@@ -47,16 +35,7 @@ function synkroniseraGrupperVissEtikett1() {
 }
 /***Grupper - Slut***/
 
-
 /***Medlemslistor***/
-/**
- * Funktioner för att ange att enbart vissa radintervall i kalkylarket
- * för medlemslistor ska synkroniseras och e-brev skickas ut.
- * Samt ställa in om medlemslistor enbart ska uppdateras alternativt om
- * det enbart ska skickas ut till listan
- *
- * Exempelvis rad 0 till 10. Helt fritt att ändra själv
- */
 function synkroniseraMedlemslistorVissaRaderUppdateraOchSkicka1() {
   ScoutnetSynkLib.uppdateraMedlemslistor(KONFIG_OBJECT, 1, 1);
   ScoutnetSynkLib.skickaUtTillMedlemslistor(KONFIG_OBJECT, 1, 1);
